@@ -470,4 +470,8 @@ class AuthController extends CI_Controller
 			->_display();
 		exit;
 	}
+
+	public function aktivasi($code){
+		
+	}
 }

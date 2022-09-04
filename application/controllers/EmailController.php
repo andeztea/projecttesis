@@ -63,6 +63,7 @@ class EmailController extends CI_Controller
         $this->email->set_mailtype("html");
         $this->email->set_newline("\r\n");
 
+
         //Email content
 
         $this->email->to('andeztea@gmail.com');
@@ -75,10 +76,20 @@ class EmailController extends CI_Controller
            echo true;
         }
         else{
+             echo $this->email->print_debugger();
             return false;
             // echo "email_not_sent";
-            echo $this->email->print_debugger();  // If any error come, its run
+             // If any error come, its run
         }
+    }
+
+
+    public function test_send_mail(){
+        $to='andeztea@gmail.com';
+        $subject='Test Send Email';
+        $content='ajakjakjakj';
+
+        send_email($to,$subject,$content);
     }
 
   

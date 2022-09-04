@@ -2,8 +2,8 @@
 
 if (!function_exists('send_email')) {
    function send_email($to,$subject,$content) {
-        
-       $this->load->library('email');
+        $CI =& get_instance();
+        $CI->load->library('email');
 
         $config = array(
             'protocol'  => 'smtp',
@@ -14,25 +14,30 @@ if (!function_exists('send_email')) {
             'mailtype'  => 'html',
             'charset'   => 'utf-8'
         );
-        $this->email->initialize($config);
-        $this->email->set_mailtype("html");
-        $this->email->set_newline("\r\n");
+
+        $CI->email->initialize($config);
+        $CI->email->set_mailtype("html");
+        $CI->email->set_newline("\r\n");
 
         //Email content
 
-        $this->email->to($to);
-        $this->email->from('admin@marpth5.com','Konfirmasi Pendaftaran');
-        $this->email->subject($subject);
-        $this->email->message($content);
+        $CI->email->to($to);
+        $CI->email->from('admin@marpth5.com','Konfirmasi Pendaftaran');
+        $CI->email->subject($subject);
+        $CI->email->message($content);
+
+
+
 
         //Send email
-        if($this->email->send()){
+        if($CI->email->send()){
             return true;
         }
         else{
+            echo $CI->email->print_debugger();
             return false;
-            // echo "email_not_sent";
-            // echo $this->email->print_debugger();  // If any error come, its run
+            //echo "email_not_sent";
+            //echo $CI->email->print_debugger();  // If any error come, its run
         }
 
 
